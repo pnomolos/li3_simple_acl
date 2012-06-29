@@ -42,6 +42,9 @@ class Acl {
      * @return boolean
      */
     public static function isAllowed($user, $perms){
+        if (!$user) {
+            return false;
+        }
         $perms = (array) $perms;
         $user = (array) $user;
         // this would be used for collections with row level perms
@@ -53,6 +56,7 @@ class Acl {
         }
 
         sort($perms); // 'any' will go early or even first
+
         foreach ($perms as $rule) {
             // any
             if ('any' == $rule) {
