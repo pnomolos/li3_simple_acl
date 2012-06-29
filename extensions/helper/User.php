@@ -2,7 +2,7 @@
 
 namespace li3_simple_acl\extensions\helper;
 use lithium\security\Auth;
-
+use li3_simple_acl\extensions\security\Acl;
 /**
  * Usage, in a view:
  * <?=$this->user->fullName(); ?>
@@ -24,6 +24,9 @@ class User extends \lithium\template\Helper {
         return $userinfo["first_name"] . " " . $userinfo["last_name"];
     }
 
+    public function allowed($perms) {
+        return Acl::isAllowed($this->info(), $perms);
+    }
 }
 
 ?>
